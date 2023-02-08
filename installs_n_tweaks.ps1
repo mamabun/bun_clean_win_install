@@ -391,10 +391,10 @@ echo " "
 echo "Show verbose login messages"
 reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" /V "VerboseStatus" /t REG_DWORD /d 1 /f
 
-
+#Test-Path doesn't like system variables. Hardcoded it for now"
 echo " "
 echo "Removing NVidia telemetry"
-if (Test-Path -LiteralPath "%ProgramFiles%\NVIDIA Corporation\Installer2\InstallerCore\NVI2.DLL" -PathType Leaf)
+if (Test-Path -LiteralPath "C:\Program Files\NVIDIA Corporation\Installer2\InstallerCore\NVI2.DLL" -PathType Leaf)
 { rundll32 "%PROGRAMFILES%\NVIDIA Corporation\Installer2\InstallerCore\NVI2.DLL",UninstallPackage NvTelemetryContainer
     rundll32 "%PROGRAMFILES%\NVIDIA Corporation\Installer2\InstallerCore\NVI2.DLL",UninstallPackage NvTelemetry
 	del /s "%SystemRoot%\System32\DriverStore\FileRepository\NvTelemetry*.dll"
