@@ -1,4 +1,5 @@
 # TODO: More apps?
+#	Fix Nvidia telemetry removal
 
 echo "This script installs Mamabun's default apps and tweaks"
 read-host  "Hit ctrl-c to exit or enter to continue"
@@ -392,23 +393,23 @@ echo "Show verbose login messages"
 reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" /V "VerboseStatus" /t REG_DWORD /d 1 /f
 
 #Test-Path doesn't like system variables. Hardcoded it for now"
-echo " "
-echo "Removing NVidia telemetry"
-if (Test-Path -LiteralPath "C:\Program Files\NVIDIA Corporation\Installer2\InstallerCore\NVI2.DLL" -PathType Leaf)
-{ rundll32 "%PROGRAMFILES%\NVIDIA Corporation\Installer2\InstallerCore\NVI2.DLL",UninstallPackage NvTelemetryContainer
-    rundll32 "%PROGRAMFILES%\NVIDIA Corporation\Installer2\InstallerCore\NVI2.DLL",UninstallPackage NvTelemetry
-	del /s "%SystemRoot%\System32\DriverStore\FileRepository\NvTelemetry*.dll"
-	rmdir /s /q "%ProgramFiles(x86)%\NVIDIA Corporation\NvTelemetry" 2>nul
-	rmdir /s /q "%ProgramFiles%\NVIDIA Corporation\NvTelemetry" 2>nul
-	reg add "HKLM\SOFTWARE\NVIDIA Corporation\NvControlPanel2\Client" /v "OptInOrOutPreference" /t REG_DWORD /d 0 /f 
-	reg add "HKLM\SOFTWARE\NVIDIA Corporation\Global\FTS" /v "EnableRID44231" /t REG_DWORD /d 0 /f 
-	reg add "HKLM\SOFTWARE\NVIDIA Corporation\Global\FTS" /v "EnableRID64640" /t REG_DWORD /d 0 /f 
-	reg add "HKLM\SOFTWARE\NVIDIA Corporation\Global\FTS" /v "EnableRID66610" /t REG_DWORD /d 0 /f 
-	reg add "HKLM\SYSTEM\CurrentControlSet\Services\nvlddmkm\Global\Startup" /v "SendTelemetryData" /t REG_DWORD /d 0 /f
-}	
-else {
-	echo "Not found, skipping"
-}
+#echo " "
+#echo "Removing NVidia telemetry"
+#if (Test-Path -LiteralPath "C:\Program Files\NVIDIA Corporation\Installer2\InstallerCore\NVI2.DLL" -PathType Leaf)
+#{ rundll32 "%PROGRAMFILES%\NVIDIA Corporation\Installer2\InstallerCore\NVI2.DLL",UninstallPackage NvTelemetryContainer
+#    rundll32 "%PROGRAMFILES%\NVIDIA Corporation\Installer2\InstallerCore\NVI2.DLL",UninstallPackage NvTelemetry
+#	del /s "%SystemRoot%\System32\DriverStore\FileRepository\NvTelemetry*.dll"
+#	rmdir /s /q "%ProgramFiles(x86)%\NVIDIA Corporation\NvTelemetry" 2>nul
+#	rmdir /s /q "%ProgramFiles%\NVIDIA Corporation\NvTelemetry" 2>nul
+#	reg add "HKLM\SOFTWARE\NVIDIA Corporation\NvControlPanel2\Client" /v "OptInOrOutPreference" /t REG_DWORD /d 0 /f 
+#	reg add "HKLM\SOFTWARE\NVIDIA Corporation\Global\FTS" /v "EnableRID44231" /t REG_DWORD /d 0 /f 
+#	reg add "HKLM\SOFTWARE\NVIDIA Corporation\Global\FTS" /v "EnableRID64640" /t REG_DWORD /d 0 /f 
+#	reg add "HKLM\SOFTWARE\NVIDIA Corporation\Global\FTS" /v "EnableRID66610" /t REG_DWORD /d 0 /f 
+#	reg add "HKLM\SYSTEM\CurrentControlSet\Services\nvlddmkm\Global\Startup" /v "SendTelemetryData" /t REG_DWORD /d 0 /f
+#}	
+#else {
+#	echo "Not found, skipping"
+#}
 
 
 echo " "
