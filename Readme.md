@@ -23,9 +23,13 @@ iCloud(Microsoft store)
 
 Registry edits and system tweaks:
 Disable SMBv1
+
 Disable Powershell 2.0 downgrade
+
 Disable camera on lockscreen
+
 Disable autorun and autoplay
+
 Disable remote assistance
 Disable Office telemetry and feedback
 Disable Media Player tracking, metadata retrieval, media license aquasition, and WMP Network Service
